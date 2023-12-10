@@ -55,11 +55,18 @@ then
 	exit 0
 fi
 
+if [[ $markerh == "" ]]
+then	
+	sortn=n
+else
+	sortn=h
+
+fi
 if [[ $n == 0 ]]
 then
-	find $dir -type f -size +"$minsize"c -exec du $markerh {} + | sort -nr 
+	find "$dir" -type f -size +"$minsize"c -exec du -b $markerh {} + | sort -${sortn}r 
 else
-	find $dir -type f -size +"$minsize"c -exec du $markerh {} + | sort -nr | head $n
+	find "$dir" -type f -size +"$minsize"c -exec du -b $markerh {} + | sort -${sortn}r | head $n
 	
 fi
 
